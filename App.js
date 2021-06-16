@@ -14,20 +14,17 @@ const App = () => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  // Handle user state changes
-  function onAuthStateChanged(user) {
-    setUser(user);
-    if (initializing) setInitializing(false);
-  }
-
   const signOut = () => {
     auth()
       .signOut()
       .then(() => console.log('Signing out'));
   }
 
-  //Register
-
+  // Handle user state changes
+  function onAuthStateChanged(user) {
+    setUser(user);
+    if (initializing) setInitializing(false);
+  }
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
@@ -51,7 +48,7 @@ const App = () => {
       </Stack.Navigator>
     </NavigationContainer>
     )
-  }console.log(user)
+  }
 
   return (
     <View>
