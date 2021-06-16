@@ -1,51 +1,39 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 import { View, Button, TextInput } from 'react-native'
 import auth from '@react-native-firebase/auth';
 
-
-export class Login extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            email : '',
-            password: '',
-            name: '',
-        }
-
-        this.onSignIn = this.onSignIn.bind(this)
-    }
-
-    onSignIn() {
-        const {email, password, name} = this.state;
-        auth().signInWithEmailAndPassword(email, password)
+export default function Register() {
+    
+    const [user, setUser] = useState({email : '',
+                                    password : '',
+                                    name: ''});
+    
+    const onSignIn = () => {
+        auth().signInWithEmailAndPassword(user.email, user.password)
             .then((result) => {
                 console.log(result)
             })
             .catch((error) => {
                 console.log(error)
-            })
+            });
     }
 
-    render() {
-        return (
-            <View>
+    return (
+        <View>
                 <TextInput 
                     placeholder="email"
-                    onChangeText={(email) => this.setState({ email })}
+                    onChangeText={(val) => setUser({email: val, password: user.password})}
                 />
                 <TextInput 
                     placeholder="password"
                     secureTextEntry= {true}
-                    onChangeText={(password) => this.setState({ password })}
+                    onChangeText={(val) => setUser({email: user.email, password: val})}
                 />
 
                 <Button
-                    onPress={() => this.onSignIn}
+                    onPress={() => onSignIn()}
                     title="Submit"
                 />
             </View>
-        )
-    }
+    )
 }
-
-export default Login

@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Button } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import auth from '@react-native-firebase/auth';
@@ -18,6 +18,12 @@ const App = () => {
   function onAuthStateChanged(user) {
     setUser(user);
     if (initializing) setInitializing(false);
+  }
+
+  const signOut = () => {
+    auth()
+      .signOut()
+      .then(() => console.log('Signing out'));
   }
 
   //Register
@@ -45,11 +51,11 @@ const App = () => {
       </Stack.Navigator>
     </NavigationContainer>
     )
-  }
+  }console.log(user)
 
   return (
     <View>
-      <Text>Welcome {user.email}</Text>
+      <Button title="Sign out" onPress={signOut}/>
     </View>
   );
 }

@@ -8,9 +8,10 @@ export default function Register() {
                                     password : '',
                                     name: ''});
     
-    function onSignUp() {
-        const {email, password, name} = user;
-        auth().createUserWithEmailAndPassword(email, password)
+    const onSignUp = () => {
+        console.log(user.email);
+        console.log(user.password);
+        auth().createUserWithEmailAndPassword(user.email, user.password)
             .then((result) => {
                 console.log(result)
             })
@@ -21,24 +22,22 @@ export default function Register() {
 
     return (
         <View>
-                <TextInput 
+                <TextInput
                     placeholder="name"
-                    onChangeText={(name) => user.setState({name: name,
-                                                            password: user.password,
-                                                            email: user.email})}
+                    onChangeText={(val) => setUser({name: val, email: user.email, password: user.password})}
                 />
-                <TextInput 
+                <TextInput
                     placeholder="email"
-                    onChangeText={(email) => user.setState({ email })}
+                    onChangeText={(val) => setUser({name: user.name, email: val, password: user.password})}
                 />
                 <TextInput 
                     placeholder="password"
                     secureTextEntry= {true}
-                    onChangeText={(password) => user.setState({ password })}
+                    onChangeText={(val) => setUser({name: user.name, email: user.email, password: val})}
                 />
 
                 <Button
-                    onPress={() => onSignUp}
+                    onPress={() => onSignUp()}
                     title="Submit"
                 />
         </View>
