@@ -10,11 +10,15 @@ export default function Register() {
                                     name: ''});
     
     const onSignUp = () => {
-        console.log(user.email);
-        console.log(user.password);
-        auth().createUserWithEmailAndPassword(user.email, user.password)
+        const {email, password, name} = user;
+        auth().createUserWithEmailAndPassword(email, password)
             .then((result) => {
-                
+                firestore().collection("users")
+                    .doc(auth().currentUser.uid)
+                    .set({
+                        name,
+                        email
+                    })
                 console.log(result)
             })
             .catch((error) => {

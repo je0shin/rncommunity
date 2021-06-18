@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { StyleSheet, View, Button } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import auth from '@react-native-firebase/auth';
@@ -7,7 +7,14 @@ import auth from '@react-native-firebase/auth';
 import LandingPage from './components/authentication/Landing';
 import RegisterPage from './components/authentication/Register';
 import LoginPage from './components/authentication/Login';
+import MainScreen from './components/Main'
 
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import rootReducer from './redux/reducers'
+import thunk from 'redux-thunk'
+
+const store = createStore(rootReducer, applyMiddleware(thunk))
 const Stack = createStackNavigator();
 
 const App = () => {   
@@ -51,9 +58,9 @@ const App = () => {
   }
 
   return (
-    <View>
-      <Button title="Sign out" onPress={signOut}/>
-    </View>
+    <Provider store={store}>
+      <MainScreen />
+    </Provider>
   );
 }
 
