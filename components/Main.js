@@ -4,25 +4,24 @@ import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux'
 import { fetchUser } from '../redux/actions/index';
 
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 const mapDispatchProps = (dispatch) => bindActionCreators
 
-export default function Main() {
-    useEffect(() => {
-
-    }, [])
-    return (
-        <View>
-            <Button title="Sign out" onPress={signOut}/>
-        </View>
+function LogOut() {
+    return(
+        <Button title="Sign out" onPress={signOut}/>
     )
-}
-
-import React from 'react'
-
-export default function Main() {
+} 
+export default function Main( props ) {
+    useEffect(() => {
+        props.fetchUser();
+    }, [])
+    
     return (
-        <div>
-            
-        </div>
+      <Tab.Navigator>
+        <Tab.Screen name="logout" component={Logout} />
+        <Tab.Screen name="Settings" component={SettingsScreen} />
+      </Tab.Navigator>
     )
 }
