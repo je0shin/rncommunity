@@ -1,12 +1,12 @@
 import auth from '@react-native-firebase/auth'
-import firestore from '@react-native-firebase/firestore'
+import firebase from 'firebase'
 import { USER_STATE_CHANGE } from '../constants/index'
 
 export function fetchUser() {
     return((dispatch) => {
-        firestore()
+        firebase.firestore()
         .collection("user")
-        .doc(auth().currentUser.uid)
+        .doc(firebase.auth().currentUser.uid)
         .get()
         .then((snapshot) => {
             if(snapshot.exists) {
@@ -14,6 +14,6 @@ export function fetchUser() {
             } else {
                 console.log('nope')
             }
-        })
+        }) 
     })
 }

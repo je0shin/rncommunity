@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import auth from '@react-native-firebase/auth';
+import * as firebase from 'firebase';
 
 import LandingPage from './components/authentication/Landing';
 import RegisterPage from './components/authentication/Register';
@@ -21,19 +21,13 @@ const App = () => {
   const [initializing, setInitializing] = useState(true);
   const [user, setUser] = useState();
 
-  const signOut = () => {
-    auth()
-      .signOut()
-      .then(() => console.log('Signing out'));
-  }
-
   // Handle user state changes
   function onAuthStateChanged(user) {
     setUser(user);
     if (initializing) setInitializing(false);
   }
   useEffect(() => {
-    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
+    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
 
