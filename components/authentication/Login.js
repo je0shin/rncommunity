@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { View, Button, TextInput } from 'react-native'
-import firebase from 'firebase';
+import auth from '@react-native-firebase/auth'
+import firestore from '@react-native-firebase/firestore'
 
 export default function Register() {
     
@@ -9,8 +10,14 @@ export default function Register() {
                                     name: ''});
     
     const onSignIn = () => {
-        firebase.auth().signInWithEmailAndPassword(user.email, user.password)
+        auth().signInWithEmailAndPassword(user.email, user.password)
             .then((result) => {
+                firestore().collection("users")
+                    .doc(auth.currentUser.uid)
+                    .set({
+                        name,
+                        email
+                    })
                 console.log(result)
             })
             .catch((error) => {

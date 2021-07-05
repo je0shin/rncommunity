@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import * as firebase from 'firebase';
+import auth from '@react-native-firebase/auth'
 
 import LandingPage from './components/authentication/Landing';
 import RegisterPage from './components/authentication/Register';
@@ -27,7 +27,7 @@ const App = () => {
     if (initializing) setInitializing(false);
   }
   useEffect(() => {
-    const subscriber = firebase.auth().onAuthStateChanged(onAuthStateChanged);
+    const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber; // unsubscribe on unmount
   }, []);
 
