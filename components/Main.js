@@ -3,6 +3,7 @@ import { StyleSheet, View, Text } from 'react-native';
 import { connect } from 'react-redux'
 import {bindActionCreators} from 'redux'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
 import { fetchUser } from '../redux/actions/index';
 import FreeMain from './freeTalk/FreeMain';
@@ -25,9 +26,27 @@ export default function Main( props ) {
     
     return (
       <Tab.Navigator >
-        <Tab.Screen name="Yes" component={Yes} options={{ tabBarBadge: 3 }}/>
-        <Tab.Screen name="FreeMain" component={FreeMain} />
-        <Tab.Screen name="ProfileMain" component={ProfileMain} />
+        <Tab.Screen name="FreeMain"
+          component={FreeMain}
+          options= {{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="chat" color={color} size={26} />
+            ),
+          }} />
+        <Tab.Screen name="Yes"
+          component={Yes}
+          options= {{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={26} />
+            ),
+          }} />
+        <Tab.Screen name="ProfileMain"
+          component={ProfileMain}
+          options= {{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="account" color={color} size={26} />
+            ),
+          }} />
       </Tab.Navigator>
     )
 }
