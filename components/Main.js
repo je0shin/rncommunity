@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { StyleSheet, View, Text } from 'react-native';
-import { connect } from 'react-redux'
-import {bindActionCreators} from 'redux'
+import { useDispatch, useSelector } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
@@ -9,7 +8,6 @@ import { fetchUser } from '../redux/actions/index';
 import FreeMain from './freeTalk/FreeMain';
 import ProfileMain from './profile/ProfileMain';
 
-const mapDispatchProps = (dispatch) => bindActionCreators
 const Tab = createBottomTabNavigator()
 
 function Yes() {
@@ -19,11 +17,20 @@ function Yes() {
         </View>
     )
 } 
-export default function Main( props ) {
+export default function Main() {
+    const isLoaded = useSelector(state => state.userState)
+    const dispatch = useDispatch()
     useEffect(() => {
-        fetchUser();
+        dispatch(fetchUser())
     }, [])
-    
+    console.log(isLoaded)
+    if (!isLoaded) {
+      return(
+        <View>
+          <Text> User not loaded </Text>
+        </View>
+      )
+    }
     return (
       <Tab.Navigator >
         <Tab.Screen name="FreeMain"

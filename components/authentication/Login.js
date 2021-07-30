@@ -13,7 +13,7 @@ export default function Register() {
         auth().signInWithEmailAndPassword(user.email, user.password)
             .then((result) => {
                 firestore().collection("users")
-                    .doc(auth.currentUser.uid)
+                    .doc(auth().currentUser.uid)
                     .set({
                         name,
                         email
