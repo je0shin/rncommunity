@@ -34,7 +34,7 @@ export default function Main() {
               <MaterialCommunityIcons name="chat" color={color} size={26} />
             ),
           }} />
-        <Tab.Screen name="{PostChat}"
+        <Tab.Screen name="PostChat"
           component={PostChat}
           options= {{
             tabBarIcon: ({ color, size }) => (
