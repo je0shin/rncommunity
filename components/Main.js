@@ -6,17 +6,11 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import { fetchUser } from '../redux/actions/index';
 import FreeMain from './freeTalk/FreeMain';
+import PostChat from './freeTalk/PostChat';
 import ProfileMain from './profile/ProfileMain';
 
 const Tab = createBottomTabNavigator()
 
-function Yes() {
-    return(
-        <View style={mainStyle.container}>
-          <Text> Yess </Text>
-        </View>
-    )
-} 
 export default function Main() {
     const isLoaded = useSelector(state => state.userState)
     const dispatch = useDispatch()
@@ -40,8 +34,8 @@ export default function Main() {
               <MaterialCommunityIcons name="chat" color={color} size={26} />
             ),
           }} />
-        <Tab.Screen name="Yes"
-          component={Yes}
+        <Tab.Screen name="{PostChat}"
+          component={PostChat}
           options= {{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={26} />
