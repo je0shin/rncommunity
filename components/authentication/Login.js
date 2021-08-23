@@ -12,12 +12,6 @@ export default function Register() {
     const onSignIn = () => {
         auth().signInWithEmailAndPassword(user.email, user.password)
             .then((result) => {
-                firestore().collection("users")
-                    .doc(auth().currentUser.uid)
-                    .set({
-                        name,
-                        email
-                    })
                 console.log(result)
             })
             .catch((error) => {

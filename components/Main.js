@@ -4,24 +4,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import { fetchUser } from '../redux/actions/index';
+import { fetchUser, fetchPosts } from '../redux/actions/index';
 import FreeMain from './freeTalk/FreeMain';
+import PostChat from './freeTalk/PostChat';
 import ProfileMain from './profile/ProfileMain';
 
 const Tab = createBottomTabNavigator()
 
-function Yes() {
-    return(
-        <View style={mainStyle.container}>
-          <Text> Yess </Text>
-        </View>
-    )
-} 
 export default function Main() {
     const isLoaded = useSelector(state => state.userState)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchUser())
+        dispatch(fetchPosts())
     }, [])
     console.log(isLoaded)
     if (!isLoaded) {
@@ -40,8 +35,8 @@ export default function Main() {
               <MaterialCommunityIcons name="chat" color={color} size={26} />
             ),
           }} />
-        <Tab.Screen name="Yes"
-          component={Yes}
+        <Tab.Screen name="PostChat"
+          component={PostChat}
           options= {{
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={26} />
