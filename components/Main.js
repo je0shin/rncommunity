@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons'
 
-import { fetchUser } from '../redux/actions/index';
+import { fetchUser, fetchPosts } from '../redux/actions/index';
 import FreeMain from './freeTalk/FreeMain';
 import PostChat from './freeTalk/PostChat';
 import ProfileMain from './profile/ProfileMain';
@@ -16,6 +16,7 @@ export default function Main() {
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchUser())
+        dispatch(fetchPosts())
     }, [])
     console.log(isLoaded)
     if (!isLoaded) {

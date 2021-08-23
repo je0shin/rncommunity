@@ -1,20 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 import firestore from '@react-native-firebase/firestore'
 import auth from '@react-native-firebase/auth'
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchPosts } from '../../redux/actions/index'
+
 
 export default function FreeMain() {
-    const isLoaded = useSelector(state => state.chatsState)
-    const dispatch = useDispatch()
+    const [chats, setChats] = useState([]);
+    const chatsR = useSelector(state => state.chatsState)
     useEffect(() => {
-        dispatch(fetchPosts())
-    }, [])
-    console.log(isLoaded)
+        setChats(chatsR)
+    }, [useSelector(state => state.chatsState)])
+    
+    console.log(chatsR)
+    console.log(chats)
     return(
         <View>
-            
+            <FlatList
+                numcolumns={1}
+                data={chats}
+                renderItem={({item}) => (
+                    <View>
+                        <Text> {item.content} </Text>
+                    </View>
+                )}
+            />
         </View>
     )
 }
