@@ -25,6 +25,7 @@ export default function ProfileMain() {
     return(
         <View style={profileStyle.container}>
             <Text>{currUser.name}</Text>
+            <Text>{currUser.email}</Text>
             <LogOut/>
         </View>
     )
