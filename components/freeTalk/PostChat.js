@@ -33,8 +33,9 @@ const postChat = (text) => {
             user: firestore().collection("users").doc(auth().currentUser.uid),
         })
         .then(() => {
-            console.log("psot pressed")
-          });
+            console.log("Posted")
+          }) 
+        .catch(e => console.log(e));
 }
 
 // function AddImageSection() {

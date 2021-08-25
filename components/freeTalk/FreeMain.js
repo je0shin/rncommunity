@@ -2,26 +2,32 @@ import React, { useState, useEffect } from "react";
 import { View, Text, FlatList } from 'react-native';
 import firestore from '@react-native-firebase/firestore'
 import auth from '@react-native-firebase/auth'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
-export default function FreeMain() {
+export default function FreeMain({ navigation }) {
     const [chats, setChats] = useState([]);
-    const chatsR = useSelector(state => state.chatsState)
+    const chatPosts = useSelector(state => state.chatsState)
+
     useEffect(() => {
-        setChats(chatsR)
-    }, [useSelector(state => state.chatsState)])
-    
-    console.log(chatsR)
+        const unsubscribe = navigation.addListener('focus', () => {
+            console.log("freemain useeffect When focused")
+            setChats(chatPosts.chats)
+            console.log("freemain useeffect When focused")
+
+        })
+        
+        return unsubscribe
+    }, [navigation])
     console.log(chats)
     return(
         <View>
+            <Text> Test </Text>
             <FlatList
-                numcolumns={1}
                 data={chats}
                 renderItem={({item}) => (
                     <View>
-                        <Text> {item.content} </Text>
+                        <Text> {item.chat.content} </Text>
                     </View>
                 )}
             />

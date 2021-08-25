@@ -12,14 +12,19 @@ import ProfileMain from './profile/ProfileMain';
 const Tab = createBottomTabNavigator()
 
 export default function Main() {
-    const isLoaded = useSelector(state => state.userState)
+    const currUser = useSelector(state => state.userState)
+    const currChats = useSelector(state => state.chatsState)
     const dispatch = useDispatch()
     useEffect(() => {
+        console.log("main useeffect")
         dispatch(fetchUser())
         dispatch(fetchPosts())
     }, [])
-    console.log(isLoaded)
-    if (!isLoaded) {
+    
+    console.log(currChats)
+    console.log(currUser)
+
+    if (!currUser.isLoaded) {
       return(
         <View>
           <Text> User not loaded </Text>
@@ -27,7 +32,7 @@ export default function Main() {
       )
     }
     return (
-      <Tab.Navigator >
+      <Tab.Navigator activeColor="#90EE90">
         <Tab.Screen name="FreeMain"
           component={FreeMain}
           options= {{
@@ -39,7 +44,7 @@ export default function Main() {
           component={PostChat}
           options= {{
             tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={26} />
+              <MaterialCommunityIcons name="post" color={color} size={26} />
             ),
           }} />
         <Tab.Screen name="ProfileMain"

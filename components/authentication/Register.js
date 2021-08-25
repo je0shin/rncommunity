@@ -17,7 +17,8 @@ export default function Register() {
                     .doc(auth().currentUser.uid)
                     .set({
                         name,
-                        email
+                        email,
+                        postCount: 0
                     })
                 console.log(result)
             })

@@ -22,14 +22,15 @@ export const fetchUser = () => dispatch => {
 }
 
 export const fetchPosts = () => dispatch => {
+    console.log("Fetching posts")
     firestore().collection("freeChat")
     .get()
     .then(querySnapshot => {
         console.log("size of collection ", querySnapshot.size)
         const chats = []
         querySnapshot.forEach(documentSnapshot => {
-            chats.push(documentSnapshot.data())
-            dispatch({type: CHATS_STATE_UPDATE, chats})
+            chats.push({id: documentSnapshot.id, chat: documentSnapshot.data()})
         })
+        dispatch({type: CHATS_STATE_UPDATE, chats})
     })
 }
