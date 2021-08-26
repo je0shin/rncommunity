@@ -24,6 +24,11 @@ export default function ProfileMain() {
     }, [])
     return(
         <View style={profileStyle.container}>
+<<<<<<< HEAD
+=======
+            <Text>{currUser.name}</Text>
+            <Text>{currUser.email}</Text>
+>>>>>>> 1ac7731496c24e683eb869a94719bd0f5e75c81b
             <LogOut/>
             <View>
                 <Text style={profileStyle.details}>Name: {currUser.name}</Text>
