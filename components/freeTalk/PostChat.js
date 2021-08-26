@@ -65,7 +65,7 @@ export default function PostChat() {
     const [text, setText] = useState(null)
 
     return(
-        <View>
+        <View style={styles.container}>
             <TextInput
                 placeholder="Enter your chat here"
                 onChangeText={(val) => setText(val)}
@@ -80,5 +80,10 @@ export default function PostChat() {
 }
 
 const styles = StyleSheet.create({
-
+    container: {
+        backgroundColor: 'rgb(237,237,237)',
+        marginLeft: 7,
+        marginRight: 7,
+        height: '100%'
+      },
 });

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
 import firestore from '@react-native-firebase/firestore'
 import auth from '@react-native-firebase/auth'
 import { useSelector } from 'react-redux';
@@ -21,7 +21,7 @@ export default function FreeMain({ navigation }) {
     }, [navigation])
     console.log(chats)
     return(
-        <View>
+        <View style={styles.container}>
             <Text> Test </Text>
             <FlatList
                 data={chats}
@@ -34,3 +34,12 @@ export default function FreeMain({ navigation }) {
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: 'rgb(237,237,237)',
+        marginLeft: 7,
+        marginRight: 7,
+        height: '100%'
+      },
+});
