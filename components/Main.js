@@ -16,8 +16,8 @@ export default function Main() {
     const currChats = useSelector(state => state.chatsState)
     const dispatch = useDispatch()
     useEffect(() => {
-        console.log("main useeffect")
         dispatch(fetchUser())
+        console.log("main useeffect")
         dispatch(fetchPosts())
     }, [])
     

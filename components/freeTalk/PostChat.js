@@ -66,15 +66,25 @@ export default function PostChat() {
 
     return(
         <View style={styles.container}>
-            <TextInput
-                placeholder="Enter your chat here"
-                onChangeText={(val) => setText(val)}
-            />
-            {/* <AddImageSection/> */}
-            <Button
-                onPress={() => postChat(text)}
-                title="Post"
-            />
+            <View styles={styles.contentContainer}>
+                <View styles={styles.textPreviewContainer}>
+                    <Text> {text} </Text>
+                </View>
+            </View>
+            <View styles={styles.textNSubmit}>
+                <TextInput
+                    style={styles.text}
+                    placeholder="Enter your chat here"
+                    onChangeText={(val) => setText(val)}
+                />
+                {/* <AddImageSection/> */}
+                <View style={styles.buttonContainer}>
+                    <Button
+                        onPress={() => postChat(text)}
+                        title="Post"
+                    />
+                </View>
+            </View>
         </View>
     )
 }
@@ -85,5 +95,22 @@ const styles = StyleSheet.create({
         marginLeft: 7,
         marginRight: 7,
         height: '100%'
-      },
+    },
+    contentContainer: {
+        flex: 1,
+    },
+    textPreviewContainer: {
+        padding: 5,
+        borderWidth: 1,
+        borderColor: '#000000'
+    },
+    textNSubmit: {
+        flexDirection: 'row',
+    },
+    text: {
+
+    },
+    buttonContainer: {
+
+    }
 });
